@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { DarkToggle } from "./components/DarkToggle/DarkToggle";
+import { Header } from "./components/Header/Header";
 
 function App() {
   const [theme, setTheme] = useState("");
@@ -30,7 +30,7 @@ function App() {
     <div
       className={`${theme} dark:bg-dark-gray-1 h-[100dvh] w-[100dvw] flex justify-center items-center`}
     >
-      <DarkToggle setDarkMode={handleThemeChange} />
+      <Header setDarkMode={handleThemeChange} />
     </div>
   );
 }
