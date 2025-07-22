@@ -6,7 +6,6 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-    --* initial;
 
     --color-dark-gray-1: #050505;
     --color-dark-gray-2: #1f1f1f;
