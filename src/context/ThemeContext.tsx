@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import {
   createContext,
   useContext,
@@ -6,16 +7,22 @@ import {
   type PropsWithChildren,
 } from "react";
 
-// eslint-disable-next-line react-refresh/only-export-components
+export enum FontsEnum {
+  sans = "sans",
+  serif = "serif",
+  mono = "mono",
+}
+
 export const ThemeContext = createContext<
   | {
       theme: string;
       toggleTheme: () => void;
+      font: string;
+      changeFont: (value: FontsEnum) => void;
     }
   | undefined
 >(undefined);
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const useTheme = () => {
   const context = useContext(ThemeContext);
 
@@ -27,6 +34,7 @@ export const useTheme = () => {
 
 export const ThemeProvider = ({ children }: PropsWithChildren) => {
   const [theme, setTheme] = useState("");
+  const [font, setFont] = useState("Sans Serif");
 
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
@@ -48,5 +56,26 @@ export const ThemeProvider = ({ children }: PropsWithChildren) => {
     }
   }, []);
 
-  return <ThemeContext value={{ theme, toggleTheme }}>{children}</ThemeContext>;
+  const changeFont = (value: FontsEnum) => {
+    switch (value) {
+      case FontsEnum.sans:
+        setFont("font-inter");
+        break;
+      case FontsEnum.serif:
+        setFont("font-lora");
+        break;
+      case FontsEnum.mono:
+        setFont("font-inconsolata");
+        break;
+      default:
+        setFont("font-inter");
+        break;
+    }
+  };
+
+  return (
+    <ThemeContext value={{ theme, toggleTheme, font, changeFont }}>
+      {children}
+    </ThemeContext>
+  );
 };
