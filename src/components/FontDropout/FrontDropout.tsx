@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ArrowDown from "../../assets/images/icon-arrow-down.svg";
 import { useTheme } from "../../context/ThemeContext";
 import { FontsEnum } from "../../context/ThemeContext";
@@ -7,11 +7,30 @@ export const FontDropout = () => {
   const [open, setOpen] = useState(false);
   const [fontName, setFontName] = useState("Sans Serif");
   const { font, changeFont } = useTheme();
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   const handleFontChange = (value: string, key: FontsEnum) => {
     setFontName(value);
     changeFont(key);
   };
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        dropdownRef.current &&
+        event.target instanceof Node &&
+        !dropdownRef.current.contains(event.target)
+      ) {
+        setOpen(false);
+      }
+    }
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <div className="relative font-bold">
@@ -24,7 +43,10 @@ export const FontDropout = () => {
       </div>
 
       {open && (
-        <div className="absolute mt-3 right-0 bg-white dark:bg-dark-gray-1 dark:text-white w-45 p-6 flex flex-col gap-4.5 rounded-2xl shadow-light dark:shadow-dark">
+        <div
+          ref={dropdownRef}
+          className="absolute mt-3 right-0 bg-white dark:bg-dark-gray-1 dark:text-white w-45 p-6 flex flex-col gap-4.5 rounded-2xl shadow-light dark:shadow-dark"
+        >
           <p
             onClick={() => handleFontChange("Sans Serif", FontsEnum.sans)}
             className="hover:text-purple cursor-pointer font-inter"
