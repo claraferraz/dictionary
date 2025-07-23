@@ -19,7 +19,8 @@
     --font-inter: "Inter", sans-serif;
     --font-lora: "Lora", serif;
     --font-inconsolata: "Inconsolata", monospace;
-
+    --shadow-light: 0px 5px 30px 0px rgba(0, 0, 0, 0.10);
+    --shadow-dark: 0px 5px 30px 0px #A445ED;
 }
 
 @layer components {
@@ -45,14 +46,11 @@
         p {
             font-size: 18px;
             line-height: 24px;
-            font-weight: normal;
         }
 
         span {
             font-size: 14px;
             line-height: 17px;
-            font-weight: normal;
-            text-decoration: underline;
         }
     }
 }
