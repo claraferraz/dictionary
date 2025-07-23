@@ -6,7 +6,7 @@ function App() {
 
   return (
     <div
-      className={`${theme} dark:bg-dark-gray-1 h-[100dvh] w-[100dvw] flex justify-center items-center`}
+      className={`${theme} dark:bg-dark-gray-1 h-[100dvh] w-[100dvw] flex justify-center items-center transition-colors`}
     >
       <div className="w-3xl">
         <Header />

@@ -8,11 +8,6 @@ export const Header = () => {
       <div className="flex w-27 ml-6.5 items-center justify-between">
         <div className="w-0.5 h-8 bg-light-gray-2"></div>
         <DarkToggle />
-        <img
-          className="dark:stroke-purple"
-          src="src/assets/images/icon-moon.svg"
-          alt="dark mode indicator"
-        />
       </div>
     </div>
   );
