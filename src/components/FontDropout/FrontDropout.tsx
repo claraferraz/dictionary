@@ -21,6 +21,7 @@ export const FontDropout = () => {
         event.target instanceof Node &&
         !dropdownRef.current.contains(event.target)
       ) {
+        console.log("click");
         setOpen(false);
       }
     }
@@ -33,9 +34,11 @@ export const FontDropout = () => {
   }, []);
 
   return (
-    <div className="relative font-bold">
+    <div className="relative font-bold" ref={dropdownRef}>
       <div
-        onClick={() => setOpen(!open)}
+        onClick={() => {
+          setOpen(!open);
+        }}
         className="flex items-center gap-4.5 cursor-pointer h-9"
       >
         <p className={`dark:text-white ${font}`}>{fontName}</p>
@@ -43,10 +46,7 @@ export const FontDropout = () => {
       </div>
 
       {open && (
-        <div
-          ref={dropdownRef}
-          className="absolute mt-3 right-0 bg-white dark:bg-dark-gray-1 dark:text-white w-45 p-6 flex flex-col gap-4.5 rounded-2xl shadow-light dark:shadow-dark"
-        >
+        <div className="absolute mt-3 right-0 bg-white dark:bg-dark-gray-1 dark:text-white w-45 p-6 flex flex-col gap-4.5 rounded-2xl shadow-light dark:shadow-dark z-10">
           <p
             onClick={() => handleFontChange("Sans Serif", FontsEnum.sans)}
             className="hover:text-purple cursor-pointer font-inter"
