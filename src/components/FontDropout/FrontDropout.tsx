@@ -21,7 +21,6 @@ export const FontDropout = () => {
         event.target instanceof Node &&
         !dropdownRef.current.contains(event.target)
       ) {
-        console.log("click");
         setOpen(false);
       }
     }
