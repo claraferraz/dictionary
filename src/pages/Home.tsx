@@ -2,6 +2,9 @@ import SearchIcon from "../assets/images/icon-search.svg";
 import { useForm } from "react-hook-form";
 import { twJoin } from "tailwind-merge";
 
+import { word } from "../service/DictionaryEntryType";
+import { Results } from "../components/Results/Results";
+
 type FormInputs = {
   word: string;
 };
@@ -15,6 +18,7 @@ export const Home = () => {
   } = useForm<FormInputs>({
     defaultValues: { word: "" },
   });
+
   const onSubmit = (data: FormInputs) => {
     console.log(data.word);
     if (!data.word || data.word === " ") {
@@ -45,6 +49,7 @@ export const Home = () => {
           <h3 className="text-red mt-2">{errors.word.message}</h3>
         )}
       </form>
+      <Results result={word} />
     </div>
   );
 };
