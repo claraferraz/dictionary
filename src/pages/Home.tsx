@@ -1,15 +1,21 @@
 import SearchIcon from "../assets/images/icon-search.svg";
 import { useForm } from "react-hook-form";
 import { twJoin } from "tailwind-merge";
-
-import { word } from "../service/DictionaryEntryType";
 import { Results } from "../components/Results/Results";
+import { getWord } from "../service/search";
+import { useState } from "react";
+import type { DictionaryEntry } from "../service/DictionaryEntryType";
+import { NotFoundMessage } from "../components/NotFoundMessage/NotFoundMessage";
 
 type FormInputs = {
   word: string;
 };
 
 export const Home = () => {
+  const [definition, setDefinition] = useState<DictionaryEntry[] | undefined>(
+    undefined
+  );
+  const [notFound, setNotFound] = useState<boolean | undefined>(undefined);
   const {
     register,
     handleSubmit,
@@ -19,10 +25,21 @@ export const Home = () => {
     defaultValues: { word: "" },
   });
 
-  const onSubmit = (data: FormInputs) => {
+  const onSubmit = async (data: FormInputs) => {
     console.log(data.word);
     if (!data.word || data.word === " ") {
       setError("word", { message: "Woops, can't be empty... " });
+      setNotFound(undefined);
+      setDefinition(undefined);
+      return;
+    }
+    try {
+      const response = await getWord(data.word);
+      setDefinition(response);
+      setNotFound(false);
+    } catch {
+      setDefinition(undefined);
+      setNotFound(true);
     }
   };
 
@@ -49,7 +66,8 @@ export const Home = () => {
           <h3 className="text-red mt-2">{errors.word.message}</h3>
         )}
       </form>
-      <Results result={word} />
+      {definition && <Results result={definition} />}
+      {notFound && <NotFoundMessage />}
     </div>
   );
 };
