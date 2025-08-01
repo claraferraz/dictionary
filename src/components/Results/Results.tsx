@@ -80,7 +80,15 @@ export const Results = ({ result }: Props) => {
               </div>
               <div className="bg-light-gray-2 dark:bg-dark-gray-4 w-full h-[0.0625rem] mt-10" />
               <div className="flex items-center gap-5 mt-4">
-                <span className="text-light-gray-1">Source</span>
+                <span
+                  className={twJoin(
+                    "text-light-gray-1",
+                    (font === "font-inter" || font === "font-lora") &&
+                      "underline"
+                  )}
+                >
+                  Source
+                </span>
                 {r.sourceUrls.map((s, i) => {
                   return (
                     <div key={i}>
@@ -89,7 +97,15 @@ export const Results = ({ result }: Props) => {
                         to={s}
                         target="_blank"
                       >
-                        <span className="dark:text-white">{s}</span>
+                        <span
+                          className={twJoin(
+                            "dark:text-white",
+                            (font === "font-inter" || font === "font-lora") &&
+                              "underline"
+                          )}
+                        >
+                          {s}
+                        </span>
 
                         <img
                           className="cursor-pointer"
