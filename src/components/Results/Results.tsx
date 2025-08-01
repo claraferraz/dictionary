@@ -1,17 +1,21 @@
 import type { DictionaryEntry } from "../../service/DictionaryEntryType";
 import NewWindowIcon from "/src/assets/images/icon-new-window.svg";
+import { useTheme } from "../../context/ThemeContext";
+import { twJoin } from "tailwind-merge";
+import { Link } from "react-router-dom";
 
 type Props = {
   result: DictionaryEntry[];
 };
 
 export const Results = ({ result }: Props) => {
+  const { font } = useTheme();
   return (
-    <div>
+    <div className="pb-28">
       {result &&
         result.map((r, i) => {
           return (
-            <div key={i} className="mt-11 pb-28">
+            <div key={i} className="mt-11">
               <h1 className="dark:text-white">{r.word}</h1>
               <h2 className="text-purple mt-2">{r.phonetic || null}</h2>
               <div>
@@ -28,7 +32,13 @@ export const Results = ({ result }: Props) => {
                   return (
                     <div key={i}>
                       <div className="flex items-center gap-5 my-10">
-                        <h2 className="italic font-bold dark:text-white">
+                        <h2
+                          className={twJoin(
+                            "font-bold dark:text-white",
+                            font === "font-inter" && "italic",
+                            font === "font-lora" && "font-normal"
+                          )}
+                        >
                           {m.partOfSpeech}
                         </h2>
                         <div className="bg-light-gray-2 dark:bg-dark-gray-4 w-full h-[0.0625rem]" />
@@ -71,10 +81,25 @@ export const Results = ({ result }: Props) => {
               <div className="bg-light-gray-2 dark:bg-dark-gray-4 w-full h-[0.0625rem] mt-10" />
               <div className="flex items-center gap-5 mt-4">
                 <span className="text-light-gray-1">Source</span>
-                <div className="flex items-center gap-2">
-                  <span className="dark:text-white">{r.sourceUrls}</span>
-                  <img src={NewWindowIcon} alt="new window icon" />
-                </div>
+                {r.sourceUrls.map((s, i) => {
+                  return (
+                    <div key={i}>
+                      <Link
+                        className=" cursor-pointer flex items-center gap-2"
+                        to={s}
+                        target="_blank"
+                      >
+                        <span className="dark:text-white">{s}</span>
+
+                        <img
+                          className="cursor-pointer"
+                          src={NewWindowIcon}
+                          alt="new window icon"
+                        />
+                      </Link>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           );
