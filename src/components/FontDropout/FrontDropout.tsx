@@ -5,9 +5,23 @@ import { FontsEnum } from "../../context/ThemeContext";
 
 export const FontDropout = () => {
   const [open, setOpen] = useState(false);
-  const [fontName, setFontName] = useState("Sans Serif");
+  const [fontName, setFontName] = useState("");
   const { font, changeFont } = useTheme();
   const dropdownRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    switch (font) {
+      case "font-inter":
+        setFontName("Sans Serif");
+        break;
+      case "font-lora":
+        setFontName("Serif");
+        break;
+      case "font-inconsolata":
+        setFontName("Mono");
+        break;
+    }
+  }, [font]);
 
   const handleFontChange = (value: string, key: FontsEnum) => {
     setFontName(value);

@@ -34,7 +34,7 @@ export const useTheme = () => {
 
 export const ThemeProvider = ({ children }: PropsWithChildren) => {
   const [theme, setTheme] = useState("");
-  const [font, setFont] = useState("Sans Serif");
+  const [font, setFont] = useState("");
 
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
@@ -54,21 +54,29 @@ export const ThemeProvider = ({ children }: PropsWithChildren) => {
     } else {
       setTheme(loadedTheme);
     }
+
+    const loadedFont = localStorage.getItem("font");
+    const currentFont = loadedFont ? loadedFont : "font-inter";
+    setFont(currentFont);
   }, []);
 
   const changeFont = (value: FontsEnum) => {
+    let newFont: string;
     switch (value) {
       case FontsEnum.sans:
-        setFont("font-inter");
+        newFont = "font-inter";
+        setFont(newFont);
+        localStorage.setItem("font", newFont);
         break;
       case FontsEnum.serif:
-        setFont("font-lora");
+        newFont = "font-lora";
+        setFont(newFont);
+        localStorage.setItem("font", newFont);
         break;
       case FontsEnum.mono:
-        setFont("font-inconsolata");
-        break;
-      default:
-        setFont("font-inter");
+        newFont = "font-inconsolata";
+        setFont(newFont);
+        localStorage.setItem("font", newFont);
         break;
     }
   };
