@@ -1,7 +1,6 @@
 import SearchIcon from "../assets/images/icon-search.svg";
 import { useForm } from "react-hook-form";
 import { twJoin } from "tailwind-merge";
-import { Results } from "../components/Results/Results";
 import { getWord } from "../service/search";
 import { useState } from "react";
 import type { DictionaryEntry } from "../service/DictionaryEntryType";
@@ -11,7 +10,7 @@ type FormInputs = {
   word: string;
 };
 
-export const Home = () => {
+export const HomePage = () => {
   const [definition, setDefinition] = useState<DictionaryEntry[] | undefined>(
     undefined
   );
@@ -35,6 +34,7 @@ export const Home = () => {
     try {
       const response = await getWord(data.word);
       setDefinition(response);
+      console.log(definition);
       setNotFound(false);
     } catch {
       setDefinition(undefined);
@@ -65,7 +65,6 @@ export const Home = () => {
           <h3 className="text-red mt-2">{errors.word.message}</h3>
         )}
       </form>
-      {definition && <Results result={definition} />}
       {notFound && <NotFoundMessage />}
     </div>
   );
