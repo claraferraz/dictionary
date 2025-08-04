@@ -1,19 +1,16 @@
 import SearchIcon from "../assets/images/icon-search.svg";
 import { useForm } from "react-hook-form";
 import { twJoin } from "tailwind-merge";
-import { getWord } from "../service/search";
 import { useState } from "react";
-import type { DictionaryEntry } from "../service/DictionaryEntryType";
 import { NotFoundMessage } from "../components/NotFoundMessage/NotFoundMessage";
+import { useNavigate } from "react-router-dom";
+import { useWord } from "../context/WordContext";
 
 type FormInputs = {
   word: string;
 };
 
-export const HomePage = () => {
-  const [definition, setDefinition] = useState<DictionaryEntry[] | undefined>(
-    undefined
-  );
+export const SearchBar = () => {
   const [notFound, setNotFound] = useState<boolean | undefined>(undefined);
   const {
     register,
@@ -23,22 +20,25 @@ export const HomePage = () => {
   } = useForm<FormInputs>({
     defaultValues: { word: "" },
   });
+  const { searchWord, deleteDefinition } = useWord();
+  const navigate = useNavigate();
 
   const onSubmit = async (data: FormInputs) => {
     if (!data.word || data.word === " ") {
       setError("word", { message: "Woops, can't be empty... " });
       setNotFound(undefined);
-      setDefinition(undefined);
+      navigate("/");
+      deleteDefinition();
       return;
     }
     try {
-      const response = await getWord(data.word);
-      setDefinition(response);
-      console.log(definition);
+      await searchWord(data.word);
       setNotFound(false);
+      navigate(`/${data.word}`);
     } catch {
-      setDefinition(undefined);
       setNotFound(true);
+      navigate("/");
+      deleteDefinition();
     }
   };
 
