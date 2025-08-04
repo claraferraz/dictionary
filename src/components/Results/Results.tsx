@@ -3,6 +3,7 @@ import NewWindowIcon from "/src/assets/images/icon-new-window.svg";
 import { useTheme } from "../../context/ThemeContext";
 import { twJoin } from "tailwind-merge";
 import { Link } from "react-router-dom";
+import { AudioButton } from "../AudioButton/AudioButton";
 
 type Props = {
   result: DictionaryEntry[];
@@ -19,12 +20,10 @@ export const Results = ({ result }: Props) => {
               <h1 className="dark:text-white">{r.word}</h1>
               <h2 className="text-purple mt-2">{r.phonetic || null}</h2>
               <div>
-                {r.phonetics.map((p, i) => {
-                  return (
-                    <div key={i}>
-                      <p>{p.audio}</p>
-                    </div>
-                  );
+                {r.phonetics.map((p) => {
+                  if (p.audio) {
+                    return <AudioButton audio={p.audio} />;
+                  }
                 })}
               </div>
               <div>
