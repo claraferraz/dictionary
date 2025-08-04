@@ -47,7 +47,7 @@ export const Meanings = ({
         })}
       </ul>
       {synonyms[index] && (
-        <div className="flex items-center gap-5 mt-16">
+        <div className="flex items-start gap-5 mt-16">
           <p className="text-light-gray-1">Synonyms</p>
           <h3 className="text-purple font-bold">
             {

@@ -5,25 +5,29 @@ import type { Dictionary } from "../../service/DictionaryEntryType";
 
 type Props = {
   dictionary: Dictionary;
+  index: number;
 };
 
-export const ResultContent = ({ dictionary }: Props) => {
+export const ResultContent = ({ dictionary, index }: Props) => {
   return (
-    <div className="pb-28">
+    <div key={index} className="pb-28">
       <div className="mt-11">
         <ResultHeader
           word={dictionary.word}
           phonetic={dictionary.phonetic}
           audio={dictionary.audio}
+          index={index}
         />
         {dictionary.meanings.map((m, i) => {
           return (
-            <Meanings
-              partOfSpeech={m.partOfSpeech}
-              definitions={m.definitions}
-              synonyms={m.synonyms}
-              index={i}
-            />
+            <div key={i}>
+              <Meanings
+                partOfSpeech={m.partOfSpeech}
+                definitions={m.definitions}
+                synonyms={m.synonyms}
+                index={i}
+              />
+            </div>
           );
         })}
       </div>
