@@ -8,23 +8,40 @@ import { AudioButton } from "../AudioButton/AudioButton";
 type Props = {
   result: DictionaryEntry[];
 };
+/*
+type Dictionary = {
+  word: string;
+  phonetic?: string;
+  audio?: string;
+  meanings: {
+    partOfSpeech: string;
+    definitions: {
+      definition: string;
+      example?: string;
+    }[];
+    synonyms: string[];
+  }[];
+  sourceUrls: string[];
+};
+*/
 
 export const Results = ({ result }: Props) => {
   const { font } = useTheme();
+
   return (
     <div className="pb-28">
       {result &&
         result.map((r, i) => {
+          const audio = r.phonetics.find((p) => p.audio != "");
+          console.log(audio?.audio);
           return (
             <div key={i} className="mt-11">
-              <h1 className="dark:text-white">{r.word}</h1>
-              <h2 className="text-purple mt-2">{r.phonetic || null}</h2>
-              <div>
-                {r.phonetics.map((p) => {
-                  if (p.audio) {
-                    return <AudioButton audio={p.audio} />;
-                  }
-                })}
+              <div className="flex items-center justify-between">
+                <div>
+                  <h1 className="dark:text-white">{r.word}</h1>
+                  <h2 className="text-purple mt-2">{r.phonetic || null}</h2>
+                </div>
+                {audio?.audio && <AudioButton audio={audio.audio} />}
               </div>
               <div>
                 {r.meanings.map((m, i) => {

@@ -26,7 +26,6 @@ export const Home = () => {
   });
 
   const onSubmit = async (data: FormInputs) => {
-    console.log(data.word);
     if (!data.word || data.word === " ") {
       setError("word", { message: "Woops, can't be empty... " });
       setNotFound(undefined);
