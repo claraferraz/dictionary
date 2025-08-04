@@ -1,10 +1,10 @@
-import SearchIcon from "../assets/images/icon-search.svg";
+import SearchIcon from "../../assets/images/icon-search.svg";
 import { useForm } from "react-hook-form";
 import { twJoin } from "tailwind-merge";
 import { useState } from "react";
-import { NotFoundMessage } from "../components/NotFoundMessage/NotFoundMessage";
+import { NotFoundMessage } from "../NotFoundMessage/NotFoundMessage";
 import { useNavigate } from "react-router-dom";
-import { useWord } from "../context/WordContext";
+import { useWord } from "../../context/WordContext";
 
 type FormInputs = {
   word: string;

@@ -1,4 +1,4 @@
-import { SearchBar } from "../pages/SearchBar";
+import { SearchBar } from "../components/SearchBar/SearchBar";
 import { ResultPage } from "../pages/ResultPage";
 import { Header } from "../components/Header/Header";
 import { useTheme } from "../context/ThemeContext";
