@@ -1,8 +1,8 @@
 export const NotFoundPage = () => {
   return (
-    <div className="flex flex-col items-center justify-center mt-33 ">
+    <div className="flex flex-col items-center justify-center mt-20 sm:mt-33 ">
       <h1>😕</h1>
-      <h3 className="font-bold dark:text-white mt-11 mb-6">
+      <h3 className="font-bold dark:text-white mt-6 sm:mt-11 mb-6">
         No Definitions Found
       </h3>
       <p className="text-light-gray-1 text-center">
