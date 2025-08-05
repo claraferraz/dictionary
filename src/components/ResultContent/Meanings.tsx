@@ -71,7 +71,7 @@ export const Meanings = ({
       {synonyms[index] && synonymsList && (
         <div className="flex items-start gap-5 mt-16">
           <p className="text-light-gray-1">Synonyms</p>
-          <div className="text-base">
+          <div className="flex flex-wrap">
             {synonymsList.map((s, i) => {
               const urlWord = s.replace(" ", "-");
               if (i === synonymsList.length - 1) {
