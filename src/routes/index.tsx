@@ -1,6 +1,10 @@
 import { ResultPage } from "../pages/ResultPage";
 import { NotFoundPage } from "../pages/NotFoundPage";
 
+export const Home = () => {
+  return <></>;
+};
+
 export const Result = () => {
   return <ResultPage />;
 };
