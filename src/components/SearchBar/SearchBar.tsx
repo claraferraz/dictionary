@@ -1,8 +1,6 @@
 import SearchIcon from "../../assets/images/icon-search.svg";
 import { useForm } from "react-hook-form";
 import { twJoin } from "tailwind-merge";
-import { useState } from "react";
-import { NotFoundMessage } from "../NotFoundMessage/NotFoundMessage";
 import { useNavigate } from "react-router-dom";
 import { useWord } from "../../context/WordContext";
 
@@ -11,7 +9,6 @@ type FormInputs = {
 };
 
 export const SearchBar = () => {
-  const [notFound, setNotFound] = useState<boolean | undefined>(undefined);
   const {
     register,
     handleSubmit,
@@ -20,25 +17,24 @@ export const SearchBar = () => {
   } = useForm<FormInputs>({
     defaultValues: { word: "" },
   });
-  const { searchWord, deleteDefinition } = useWord();
+  const { searchWord, deleteDefinition, deleteWord } = useWord();
   const navigate = useNavigate();
 
   const onSubmit = async (data: FormInputs) => {
     if (!data.word || data.word === " ") {
       setError("word", { message: "Woops, can't be empty... " });
-      setNotFound(undefined);
       navigate("/");
       deleteDefinition();
+      deleteWord();
       return;
     }
     try {
       await searchWord(data.word);
-      setNotFound(false);
       navigate(`/${data.word}`);
     } catch {
-      setNotFound(true);
-      navigate("/");
+      navigate("/not-found");
       deleteDefinition();
+      deleteWord();
     }
   };
 
@@ -65,7 +61,6 @@ export const SearchBar = () => {
           <h3 className="text-red mt-2">{errors.word.message}</h3>
         )}
       </form>
-      {notFound && <NotFoundMessage />}
     </div>
   );
 };
