@@ -24,10 +24,14 @@ export const ResultPage = () => {
   }, [searchWord, urlWord, word]);
 
   return (
-    <div className="pb-28">
+    <div className="pb-21 sm:pb-28">
       {definition &&
         definition.map((d, i) => {
-          return <ResultContent dictionary={d} index={i} />;
+          return (
+            <div className="mb-15">
+              <ResultContent dictionary={d} index={i} />
+            </div>
+          );
         })}
     </div>
   );

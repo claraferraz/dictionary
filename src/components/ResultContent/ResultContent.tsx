@@ -10,7 +10,7 @@ type Props = {
 
 export const ResultContent = ({ dictionary, index }: Props) => {
   return (
-    <div key={index} className="pb-21 sm:pb-28">
+    <div key={index}>
       <div className="mt-6 sm:mt-11">
         <ResultHeader
           word={dictionary.word}
