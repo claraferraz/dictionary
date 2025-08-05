@@ -11,13 +11,16 @@ export const ResultPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (urlWord && urlWord != word) {
-      try {
-        searchWord(urlWord);
-      } catch {
-        navigate("/not-found");
+    const getNewDefinition = async () => {
+      if (urlWord && urlWord != word) {
+        try {
+          await searchWord(urlWord);
+        } catch {
+          navigate("/not-found");
+        }
       }
-    }
+    };
+    getNewDefinition();
   }, [searchWord, urlWord, word]);
 
   return (
