@@ -1,8 +1,16 @@
+import { useParams } from "react-router-dom";
 import { ResultContent } from "../components/ResultContent/ResultContent";
 import { useWord } from "../context/WordContext";
+import { useEffect } from "react";
 
 export const ResultPage = () => {
-  const { definition } = useWord();
+  const { definition, word, searchWord } = useWord();
+  const url = useParams();
+  const urlWord = url.word;
+
+  useEffect(() => {
+    if (urlWord && urlWord != word) searchWord(urlWord);
+  }, [searchWord, urlWord, word]);
 
   return (
     <div className="pb-28">
