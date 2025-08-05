@@ -1,5 +1,7 @@
 import { twJoin } from "tailwind-merge";
 import { useTheme } from "../../context/ThemeContext";
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 type Props = {
   partOfSpeech: string;
@@ -18,8 +20,28 @@ export const Meanings = ({
   index,
 }: Props) => {
   const { font } = useTheme();
+  const [synonymsList, setSynonymsList] = useState<string[] | undefined>(
+    undefined
+  );
+
+  const separateSynonyms = (list: string[]): string[] => {
+    const reducedList = list.reduce((final, s) => {
+      if (s.includes(",")) {
+        const synonyms = s.split(", ");
+        return [...final, ...synonyms];
+      } else {
+        return [...final, s];
+      }
+    }, [] as string[]);
+    return reducedList;
+  };
+
+  useEffect(() => {
+    const newSynonymsList = separateSynonyms(synonyms);
+    setSynonymsList(newSynonymsList);
+  }, [synonyms]);
   return (
-    <div>
+    <div key={index}>
       <div className="flex items-center gap-5 my-10">
         <h2
           className={twJoin(
@@ -46,15 +68,31 @@ export const Meanings = ({
           );
         })}
       </ul>
-      {synonyms[index] && (
+      {synonyms[index] && synonymsList && (
         <div className="flex items-start gap-5 mt-16">
           <p className="text-light-gray-1">Synonyms</p>
-          <h3 className="text-purple font-bold">
-            {
-              synonyms.join(", ")
-              //ajustar para ser links
-            }
-          </h3>
+          <div className="text-base">
+            {synonymsList.map((s, i) => {
+              if (i === synonymsList.length - 1) {
+                return (
+                  <Link
+                    to={`/${s}`}
+                    className="text-purple font-bold text-[1.25rem] hover:underline "
+                  >
+                    {s}
+                  </Link>
+                );
+              }
+              return (
+                <Link
+                  to={`/${s}`}
+                  className="text-purple font-bold text-[1.25rem] mr-1 hover:underline"
+                >
+                  {s},
+                </Link>
+              );
+            })}
+          </div>
         </div>
       )}
     </div>
