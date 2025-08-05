@@ -25,30 +25,56 @@
 
 @layer components {
     h1 {
-        font-size: 4rem;
-        line-height: 4.8125rem;
+        font-size: 2rem;
         font-weight: bold;
     }
 
 
     h2 {
-        font-size: 1.5rem;
-        line-height: 1.8125rem;
-    }
-
-    h3 {
-        font-size: 1.25rem;
+        font-size: 1.125rem;
         line-height: 1.5rem;
     }
 
+    h3 {
+        font-size: 1rem;
+    }
+
     p {
-        font-size: 1.125rem;
+        font-size: 0.9375rem;
         line-height: 1.5rem;
     }
 
     span {
         font-size: 0.875rem;
-        line-height: 1.0625rem;
+    }
+
+    @media screen and (width >=40rem) {
+        h1 {
+            font-size: 4rem;
+            line-height: 4.8125rem;
+            font-weight: bold;
+        }
+
+
+        h2 {
+            font-size: 1.5rem;
+            line-height: 1.8125rem;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            line-height: 1.5rem;
+        }
+
+        p {
+            font-size: 1.125rem;
+            line-height: 1.5rem;
+        }
+
+        span {
+            font-size: 0.875rem;
+            line-height: 1.0625rem;
+        }
     }
 
 }
