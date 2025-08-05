@@ -39,7 +39,7 @@ export const SearchBar = () => {
   };
 
   return (
-    <div className="mt-12.5">
+    <div className="mt-7 sm:mt-12.5">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="relative">
           <input
@@ -47,7 +47,7 @@ export const SearchBar = () => {
             type="text"
             name="word"
             className={twJoin(
-              "w-full h-16 pl-6 pr-13 rounded-2xl font-bold border-0 bg-light-gray-3 dark:bg-dark-gray-2 text-dark-gray-3 dark:text-white focus:outline-purple focus:outline-1",
+              "w-full h-12 pl-6 sm:text-[1.25rem] sm:h-16 pr-13 rounded-2xl font-bold border-0 bg-light-gray-3 dark:bg-dark-gray-2 text-dark-gray-3 dark:text-white focus:outline-purple focus:outline-1",
               errors.word &&
                 "outline-red focus:outline-none border-1 border-red "
             )}

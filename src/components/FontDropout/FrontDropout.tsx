@@ -52,7 +52,7 @@ export const FontDropout = () => {
         onClick={() => {
           setOpen(!open);
         }}
-        className="flex items-center gap-4.5 cursor-pointer h-9"
+        className="flex items-center gap-4 sm:gap-4.5 cursor-pointer h-6 sm:h-9"
       >
         <p className={`dark:text-white ${font}`}>{fontName}</p>
         <img src={ArrowDown} alt="arrow down" />
