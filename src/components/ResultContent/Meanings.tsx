@@ -73,10 +73,11 @@ export const Meanings = ({
           <p className="text-light-gray-1">Synonyms</p>
           <div className="text-base">
             {synonymsList.map((s, i) => {
+              const urlWord = s.replace(" ", "-");
               if (i === synonymsList.length - 1) {
                 return (
                   <Link
-                    to={`/${s}`}
+                    to={`/${urlWord}`}
                     className="text-purple font-bold text-[1.25rem] hover:underline "
                   >
                     {s}
@@ -85,7 +86,7 @@ export const Meanings = ({
               }
               return (
                 <Link
-                  to={`/${s}`}
+                  to={`/${urlWord}`}
                   className="text-purple font-bold text-[1.25rem] mr-1 hover:underline"
                 >
                   {s},
