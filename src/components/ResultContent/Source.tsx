@@ -11,12 +11,12 @@ export const Source = ({ sourceUrls }: Props) => {
   const { font } = useTheme();
   return (
     <div>
-      <div className="bg-light-gray-2 dark:bg-dark-gray-4 w-full h-[0.0625rem] mt-10" />
-      <div className="flex items-center gap-5 mt-4">
+      <div className="bg-light-gray-2 dark:bg-dark-gray-4 w-full h-[0.0625rem] mt-8 sm:mt-10" />
+      <div className="mt-5 sm:flex sm:items-baseline sm:gap-5">
         <span
           className={twJoin(
-            "text-light-gray-1",
-            (font === "font-inter" || font === "font-lora") && "underline"
+            "text-light-gray-1 underline mb-2",
+            font === "font-inconsolata" && "sm:no-underline"
           )}
         >
           Source
@@ -25,7 +25,7 @@ export const Source = ({ sourceUrls }: Props) => {
           return (
             <div key={i}>
               <Link
-                className=" cursor-pointer flex items-center gap-2"
+                className="cursor-pointer flex flex-wrap items-center gap-4 sm:gap-2"
                 to={s}
                 target="_blank"
               >

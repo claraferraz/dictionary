@@ -42,20 +42,20 @@ export const Meanings = ({
   }, [synonyms]);
   return (
     <div key={index}>
-      <div className="flex items-center gap-5 my-10">
+      <div className="flex items-center gap-4 my-8 sm:gap-5 sm:my-10">
         <h2
           className={twJoin(
             "font-bold dark:text-white",
             font === "font-inter" && "italic",
-            font === "font-lora" && "font-normal"
+            font === "font-lora" && "italic sm:font-normal sm:not-italic"
           )}
         >
           {partOfSpeech}
         </h2>
         <div className="bg-light-gray-2 dark:bg-dark-gray-4 w-full h-[0.0625rem]" />
       </div>
-      <p className="mb-6 text-light-gray-1">Meaning</p>
-      <ul className="pl-5 ">
+      <h3 className="mb-4 sm:mb-6 text-light-gray-1">Meaning</h3>
+      <ul className="pl-5 sm:pl-5 sm:ml-5">
         {definitions.map((d, i) => {
           return (
             <li
@@ -69,8 +69,8 @@ export const Meanings = ({
         })}
       </ul>
       {synonyms[index] && synonymsList && (
-        <div className="flex items-start gap-5 mt-16">
-          <p className="text-light-gray-1">Synonyms</p>
+        <div className="flex items-start gap-6 mt-6 sm:gap-10 sm:mt-10">
+          <h3 className="text-light-gray-1">Synonyms</h3>
           <div className="flex flex-wrap">
             {synonymsList.map((s, i) => {
               const urlWord = s.replace(" ", "-");
@@ -78,7 +78,7 @@ export const Meanings = ({
                 return (
                   <Link
                     to={`/${urlWord}`}
-                    className="text-purple font-bold text-[1.25rem] hover:underline "
+                    className="text-purple font-bold text-[1rem] sm:text-[1.25rem] hover:underline "
                   >
                     {s}
                   </Link>
@@ -87,7 +87,7 @@ export const Meanings = ({
               return (
                 <Link
                   to={`/${urlWord}`}
-                  className="text-purple font-bold text-[1.25rem] mr-1 hover:underline"
+                  className="text-purple font-bold text-[1rem] sm:text-[1.25rem] mr-1 hover:underline"
                 >
                   {s},
                 </Link>

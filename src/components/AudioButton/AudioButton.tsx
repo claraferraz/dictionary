@@ -15,7 +15,7 @@ export const AudioButton = ({ audio }: Props) => {
       <button
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
-        className={`cursor-pointer`}
+        className="cursor-pointer w-12 h-12 sm:w-18"
         onClick={() => track.play()}
       >
         {!hover && <img src={Play} alt="play button" />}
