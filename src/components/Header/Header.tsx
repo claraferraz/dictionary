@@ -1,6 +1,6 @@
 import { DarkToggle } from "../DarkToggle/DarkToggle";
 import { FontDropout } from "../FontDropout/FrontDropout";
-import BookLogo from "src/assets/images/logo.svg";
+import BookLogo from "../../assets/images/logo.svg";
 
 export const Header = () => {
   return (
