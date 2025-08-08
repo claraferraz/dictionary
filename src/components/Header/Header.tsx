@@ -1,10 +1,11 @@
 import { DarkToggle } from "../DarkToggle/DarkToggle";
 import { FontDropout } from "../FontDropout/FrontDropout";
+import BookLogo from "src/assets/images/logo.svg";
 
 export const Header = () => {
   return (
     <div className="flex justify-between items-center w-full h-8 sm:h-9">
-      <img src="src/assets/images/logo.svg" alt="book doodle" />
+      <img src={BookLogo} alt="book doodle" />
       <div className="flex items-center">
         <div>
           <FontDropout />
